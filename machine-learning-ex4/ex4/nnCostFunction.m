@@ -28,8 +28,8 @@ function [J grad] = nnCostFunction(nn_params, ...
             
     % You need to return the following variables correctly 
     J = 0;
-    Theta1_grad = zeros(size(Theta1));
-    Theta2_grad = zeros(size(Theta2));
+    Theta1_grad = zeros(size(Theta1)) + (lambda / m) * Theta1;
+    Theta2_grad = zeros(size(Theta2)) + (lambda / m) * Theta2;
 
     % ====================== YOUR CODE HERE ======================
     % Instructions: You should complete the code by working through the
@@ -80,6 +80,14 @@ function [J grad] = nnCostFunction(nn_params, ...
     %               over the training examples if you are implementing it for the 
     %               first time.
     %
+        delta_3 = A3 - y_new;
+        delta_2 = (Theta2(:, 2:end)' * delta_3) .* sigmoidGradient(Z2);
+
+        Delta_1 = delta_2 * A1';
+        Delta_2 = delta_3 * A2';
+
+        Theta1_grad = (1 / m) * Delta_1;
+        Theta2_grad = (1 / m) * Delta_2;
     % Part 3: Implement regularization with the cost function and gradients.
     %
     %         Hint: You can implement this around the code for
