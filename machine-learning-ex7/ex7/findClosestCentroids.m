@@ -20,11 +20,17 @@ idx = zeros(size(X,1), 1);
 %
 % Note: You can use a for-loop over the examples to compute this.
 %
-
-
-
-
-
+m = size(X, 1);
+for i = 1:m
+    min_dist = intmax('int32');
+    for j=1:K
+        dist_from_centroid = sum(( X(i, :) - centroids(j,:)) .^ 2);
+        if dist_from_centroid < min_dist
+            idx(i) = j;
+            min_dist = dist_from_centroid;
+        end
+    end
+end
 
 
 % =============================================================
