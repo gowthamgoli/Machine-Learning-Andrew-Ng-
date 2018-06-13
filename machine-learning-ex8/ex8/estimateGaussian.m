@@ -21,9 +21,11 @@ sigma2 = zeros(n, 1);
 %               should contain variance of the i-th feature.
 %
 
+mean_col_X = mean(X, 1);
+mu = mean_col_X';
 
-
-
+var_col_X = ((m-1) / m) * var(X);
+sigma2 = var_col_X';
 
 
 
