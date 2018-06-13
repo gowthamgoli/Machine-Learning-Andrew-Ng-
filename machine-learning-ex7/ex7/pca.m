@@ -21,7 +21,8 @@ S = zeros(n);
 %
 
 
-
+covariance_matrix_X = (1 / m) * X' * X;
+[U, S, V] = svd(covariance_matrix_X);
 
 
 
